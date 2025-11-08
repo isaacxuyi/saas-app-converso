@@ -1,5 +1,6 @@
 import CompanionCard from "@/components/CompanionCard"
 import CTA from "@/components/CTA"
+import CompanionList from "@/components/CompanionList"
 
 
 const Page = () => {
@@ -34,7 +35,7 @@ const Page = () => {
     </section>
 
     <section className="home-section">
-      <CompanionCard />
+      <CompanionList />
       <CTA />
     </section>
     </main>

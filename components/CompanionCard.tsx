@@ -1,3 +1,7 @@
+import Image from "next/image"
+import bookmarkIcon from '../public/icons/bookmark.svg'
+import clockDuration from '../public/icons/clock.svg'
+import Link from "next/link"
 interface CompanionCardProps {
       id: string;
       name: string;
@@ -7,13 +11,27 @@ interface CompanionCardProps {
       color: string;
 }
 
+
 const CompanionCard = ({id, name, topic, subject, duration, color}:
   CompanionCardProps ) => {
   return (
     <article className="companion-card" style={{backgroundColor: color}}>
         <div className="justify-between flex item-center">
           <div className="subject-badge">{subject}</div>
+          <button className="companion-bookmark">
+            <Image src={bookmarkIcon} alt="bookmark" width={12.5} height={15}/>
+          </button>
         </div>
+
+        <h1 className="text-2xl font-bold">{name}</h1>
+        <p className="text-sm">{topic}</p>
+        <div className="flex item-center gap-2">
+          <Image src={clockDuration} alt="duration" width={13.5} height={13.5}></Image>
+          <p className="texsm">{duration} mins duration</p>
+        </div>
+           <Link href={`/app/companions/${id}`} className="w-full">
+            <button className="btn-primary w-full justify-center">Launch Lesson</button>
+          </Link>
     </article>
   )
 }
