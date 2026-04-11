@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { cn } from "@/lib/utils";
+import { cn, getSubjectColor } from "@/lib/utils";
 import { Companion } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
@@ -44,7 +44,7 @@ const CompanionList = ({ title, companions, className }: CompanionsListprops) =>
                 <TableCell>
                   <Link href={`/companions/${id}`}>
                     <div className="flex items-center gap-2">
-                      <div>
+                      <div className="size-[72px] flex items-center justify-center rounded-lg max-md:hidden" style={{backgroundColor: getSubjectColor(subject)}} >
                         <Image 
                           src={imageSrc} 
                           alt={subject || "Default Subject"} 
@@ -52,6 +52,7 @@ const CompanionList = ({ title, companions, className }: CompanionsListprops) =>
                           height={35} 
                         />
                       </div>
+                      <div className="flex flex-col"></div>
                     </div>
                   </Link>
                 </TableCell>
