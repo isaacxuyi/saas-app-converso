@@ -26,8 +26,8 @@ const CompanionList = ({ title, companions, className }: CompanionsListprops) =>
           <TableRow>
             <TableHead className="w-[100px] text-lg">Lesson</TableHead>
             {/* Kept text-right to match your original design, or use text-center */}
-            <TableHead className="w-[140px] text-lg text-right">Subject</TableHead>
-            <TableHead className="w-[90px] text-lg text-right">Duration</TableHead>
+            <TableHead className="w-[140px] text-lg text-center">Subject</TableHead>
+            <TableHead className="w-[90px] text-lg text-center">Duration</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -59,7 +59,7 @@ const CompanionList = ({ title, companions, className }: CompanionsListprops) =>
                 </TableCell>
                 
                 {/* Fixed Alignment: Added text-right to the TableCell and ml-auto to the badge */}
-                <TableCell className="text-right">
+                <TableCell className="text-center">
                   <div className="subject-badge w-fit ml-auto max-md:hidden">
                     {subject} 
                   </div>
@@ -72,8 +72,18 @@ const CompanionList = ({ title, companions, className }: CompanionsListprops) =>
                   </div>
                 </TableCell>
 
-                <TableCell className="text-right font-medium">
-                  {duration}
+                <TableCell>
+                  <div className="flex items-center justify-end gap-1">
+                    <p className="font-medium text-lg">
+                      {duration} <span className="max-md:hidden">mins</span>
+                    </p>
+                    <Image 
+                      src="/icons/clock.svg" 
+                      alt="duration" 
+                      width={16} 
+                      height={16} 
+                    />
+                  </div>
                 </TableCell>
               </TableRow>
             );
