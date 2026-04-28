@@ -60,10 +60,10 @@ const CompanionList = ({ title, companions, className }: CompanionsListprops) =>
                 
                 {/* Fixed Alignment: Added text-right to the TableCell and ml-auto to the badge */}
                 <TableCell className="text-center">
-                  <div className="subject-badge w-fit ml-auto max-md:hidden">
-                    {subject} 
+                  <div className="subject-badge w-fit mx-auto max-md:hidden">
+                    {subject}
                   </div>
-                  <div className="flex items-center justify-center rounded-lg w-fit p-2 md:hidden ml-auto" style={{backgroundColor: getSubjectColor(subject)}}>
+                  <div className="flex items-center justify-center rounded-lg w-fit p-2 md:hidden mx-auto" style={{backgroundColor: getSubjectColor(subject)}}>
                     <Image src={imageSrc}
                       alt={subject || "Default Subject"}
                       width={18}
