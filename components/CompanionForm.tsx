@@ -16,6 +16,16 @@ import {
   FormField,
 } from "@/components/ui/form"
 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { subjects } from "@/constants"
+
 const formSchema = z.object({
     name: z.string().min(1, { message: "Companion is required" }).max(50),
     subject: z.string().min(1, { message: "subject is required" }).max(50),
@@ -75,11 +85,25 @@ const CompanionForm = () => {
                     <FormItem>
                         <FormLabel>Subject</FormLabel>
                         <FormControl>
-                            <input
-                                className="w-full rounded-md border border-slate-200 bg-background px-3 py-2 text-sm shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200 disabled:cursor-not-allowed disabled:opacity-50"
-                                placeholder="Enter your companion name"
-                                {...field}
-                            />
+                            <Select
+                             onValueChange={field.onChange}
+                             value={field.value}
+                             defaultValue={field.value}>
+                             
+  <SelectTrigger className="w-[180px] input capitalize">
+    <SelectValue placeholder="select subject" />
+  </SelectTrigger>
+  <SelectContent>
+    {subjects.map((subject) => (
+        <SelectItem 
+        value={subject} 
+        key={subject}
+        className="capitalize">
+            {subject}
+        </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
                         </FormControl>
                         <FormDescription>
                             This is your public display name.
