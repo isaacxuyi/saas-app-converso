@@ -1,13 +1,12 @@
 "use client"
 
 import { z } from "zod"
-import { useForm } from "react-hook-form"
+import { useForm, type Resolver, type SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 
 import {
   Form,
-  useFormField,
   FormItem,
   FormLabel,
   FormControl,
@@ -19,7 +18,6 @@ import {
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -36,21 +34,22 @@ const formSchema = z.object({
 }) 
 
 
+type FormValues = z.infer<typeof formSchema>
+
 const CompanionForm = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema) as Resolver<FormValues>,
     defaultValues: {
-        name: '',
-        subject: "",
-        topic: "",
-        voice: "",
-        style: "",
-        duration: 15,
+      name: '',
+      subject: "",
+      topic: "",
+      voice: "",
+      style: "",
+      duration: 15,
     },
   })
  
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // Do something with the form values.
+  const onSubmit: SubmitHandler<FormValues> = (values) => {
     console.log(values)
   }
 
@@ -105,9 +104,7 @@ const CompanionForm = () => {
   </SelectContent>
 </Select>
                         </FormControl>
-                        <FormDescription>
-                            This is your public display name.
-                        </FormDescription>
+                    
                         <FormMessage />
                     </FormItem>
                 )}
@@ -120,57 +117,76 @@ const CompanionForm = () => {
                     <FormItem>
                         <FormLabel>Topic</FormLabel>
                         <FormControl>
-                            <input
+                            <textarea
                                 className="w-full rounded-md border border-slate-200 bg-background px-3 py-2 text-sm shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200 disabled:cursor-not-allowed disabled:opacity-50"
-                                placeholder="Enter your companion name"
+                                placeholder="Ex. Derivatives & Integrals"
                                 {...field}
                             />
                         </FormControl>
-                        <FormDescription>
-                            This is your public display name.
-                        </FormDescription>
+                      
                         <FormMessage />
                     </FormItem>
                 )}
                 
             />
-             <FormField
+            <FormField
                 control={form.control}
                 name="voice"
                 render={({ field }) => (
                     <FormItem>
                         <FormLabel>Voice</FormLabel>
                         <FormControl>
-                            <input
-                                className="w-full rounded-md border border-slate-200 bg-background px-3 py-2 text-sm shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200 disabled:cursor-not-allowed disabled:opacity-50"
-                                placeholder="Enter your voice"
-                                {...field}
-                            />
+                            <Select
+                             onValueChange={field.onChange}
+                             value={field.value}
+                             defaultValue={field.value}>
+                             
+  <SelectTrigger className="w-[180px] input">
+    <SelectValue placeholder="Select the voice" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="male">
+                    Male
+    </SelectItem>
+    <SelectItem value="female">
+                    Female
+    </SelectItem>
+  </SelectContent>
+</Select>
                         </FormControl>
-                        <FormDescription>
-                            This is your public display name.
-                        </FormDescription>
+                    
                         <FormMessage />
                     </FormItem>
                 )}
                 
             />
+             
              <FormField
                 control={form.control}
                 name="style"
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Style</FormLabel>
+                        <FormLabel>style</FormLabel>
                         <FormControl>
-                            <input
-                                className="w-full rounded-md border border-slate-200 bg-background px-3 py-2 text-sm shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200 disabled:cursor-not-allowed disabled:opacity-50"
-                                placeholder="Enter your style"
-                                {...field}
-                            />
+                            <Select
+                             onValueChange={field.onChange}
+                             value={field.value}
+                             defaultValue={field.value}>
+                             
+  <SelectTrigger className="w-[180px] input">
+    <SelectValue placeholder="Select a style" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="Formal">
+                    Formal
+    </SelectItem>
+    <SelectItem value="Informal">
+                    Informal
+    </SelectItem>
+  </SelectContent>
+</Select>
                         </FormControl>
-                        <FormDescription>
-                            This is your public display name.
-                        </FormDescription>
+                    
                         <FormMessage />
                     </FormItem>
                 )}
@@ -178,26 +194,24 @@ const CompanionForm = () => {
             />
              <FormField
                 control={form.control}
-                name="Duration"
+                name="duration"
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Duration</FormLabel>
+                        <FormLabel>Estimated session duration in minutes</FormLabel>
                         <FormControl>
-                            <input
-                                className="w-full rounded-md border border-slate-200 bg-background px-3 py-2 text-sm shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200 disabled:cursor-not-allowed disabled:opacity-50"
-                                placeholder="Enter the duration"
+                            <input type="number"
+                                className="input w-full rounded-md border border-slate-200 bg-background px-3 py-2 text-sm shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200 disabled:cursor-not-allowed disabled:opacity-50"
+                                placeholder="15"
                                 {...field}
                             />
                         </FormControl>
-                        <FormDescription>
-                            This is your public display name.
-                        </FormDescription>
+                        
                         <FormMessage />
                     </FormItem>
                 )}
                 
             />
-            <Button type="submit">submit</Button>
+            <Button type="submit" className="w-full cursor-pointer mb-5">Build your companion</Button>
         </form>
     </Form>
     
