@@ -19,7 +19,7 @@ const Navbar = () => {
         
    </Link> 
 
-   <div className="flex items-center gap-8">
+   <div className="flex items-center gap-8 ">
     <NavItems />
     <Show when="signed-out">
       <SignInButton />
