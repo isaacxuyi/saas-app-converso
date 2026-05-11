@@ -29,7 +29,7 @@ const CompanionCard = ({id, name, topic, subject, duration, color}:
           <Image src={clockDuration} alt="duration" width={13.5} height={13.5}></Image>
           <p className="texsm">{duration} mins duration</p>
         </div>
-           <Link href={`/app/companions/${id}`} className="w-full">
+           <Link href={`/companions/${id}`} className="w-full">
             <button className="btn-primary w-full justify-center">Launch Lesson</button>
           </Link>
     </article>
